@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contactos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list *ngFor="let contacto of listaContactos">
+    <ion-item [routerLink]="['/detalle/', contacto.id]" routerDirection="forward">
+      <ion-avatar slot="start" >
+          <ion-img src="assets/img/avatar.jpg"></ion-img>
+        </ion-avatar>
+      {{contacto.id}} {{contacto.nombre}}
+    </ion-item>
+  </ion-list>
+
+  <ion-button routerLink="/home" routerDirection="back">Volver a home</ion-button>
+  <ion-button routerLink="/registrar-contacto" routerDirection="back">Registra Nuevo contacto</ion-button>
+</ion-content>

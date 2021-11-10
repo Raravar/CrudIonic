@@ -1,0 +1,50 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Contacto</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/contactos'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class='card'>
+
+    <ion-card-header>
+      <ion-title>Datos Contacto</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-input type="hidden" [(ngModel)]="contacto.id" ></ion-input>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="contacto.nombre"></ion-input>
+      </ion-item> 
+     <ion-item lines="full">
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input type="text" [(ngModel)]="contacto.apellidos"></ion-input>
+    </ion-item>
+   <ion-item lines="full">
+        <ion-label position="floating">Domicilio</ion-label>
+        <ion-input type="text" [(ngModel)]="contacto.domicilio"></ion-input>
+   </ion-item>  
+   <ion-item lines="full">
+    <ion-label position="floating" >Fono</ion-label>
+    <ion-input type="text" [(ngModel)]="contacto.fono"></ion-input>
+  </ion-item>  
+  <ion-item lines="full">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="contacto.email"></ion-input>
+  </ion-item>  
+   </ion-card-content> 
+    <ion-row>
+      <ion-col>
+        <!-- Indicamos mediante el (click) la funcion a quien referenciara-->
+        <ion-button expand="full" (click)="actualizarContacto()">Grabar Modificación</ion-button>
+      </ion-col>
+      <ion-col>
+           <!-- Indicamos mediante el (click) la funcion a quien referenciara-->
+           <ion-button color="danger" expand="full" (click)="borrarContacto()">Borrar Contacto</ion-button>
+          </ion-col>
+    </ion-row>
+  
+</ion-content>
