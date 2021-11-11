@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -14,25 +14,29 @@ const routes: Routes = [
   {
     path: 'asistencia',
     pathMatch: 'full',
-    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+    loadChildren: () => import('./asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
   },
   {
-   path: 'detalle/:asistenciaId',
-   pathMatch: 'full',
-   loadChildren: () => import('./detalle-asistencia/detalle-asistencia.module').then( m => m.DetalleAsistenciaPageModule)
+    path: 'detalle/:asistenciaId',
+    pathMatch: 'full',
+    loadChildren: () => import('./detalle-asistencia/detalle-asistencia.module').then(m => m.DetalleAsistenciaPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'registrar-asistencia',
-    loadChildren: () => import('./asistencia/registrar-asistencia/registrar-asistencia.module').then( m => m.RegistrarAsistenciaPageModule)
+    loadChildren: () => import('./asistencia/registrar-asistencia/registrar-asistencia.module').then(m => m.RegistrarAsistenciaPageModule)
   },
   {
     path: 'principal',
-    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
-  }
+    loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule)
+  },
+  {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  },
 ];
 
 @NgModule({

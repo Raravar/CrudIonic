@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Volver</ion-title>
+      <ion-buttons slot="start" > <!--posiciona al junto al titulo el boton-->
+        <ion-back-button defaultHref='/principal'></ion-back-button> <!--boton para volver atras ubicado junto al titulo forma de flecha-->
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [ngClass]="'blogcontainer'">
+    <ngx-masonry [useImagesLoaded]="true" [options]="{ transitionDuration: '0.8s' }">
+        <ion-card ngxMasonryItem class="masonry-item welcome-card" *ngFor="let datos of datosObservable | async">
+        
+            <ion-card-header>
+                <ion-card-title>{{datos.id}} {{datos.title}}</ion-card-title>
+            </ion-card-header>
+            {{datos.body}}
+        </ion-card>
+    </ngx-masonry>
+</ion-content>
