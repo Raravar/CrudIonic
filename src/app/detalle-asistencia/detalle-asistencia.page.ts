@@ -2,38 +2,37 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Contacto} from '../contactos/contacto.model';
-import { ContactosService} from '../contactos/contactos.service';
+import { Asistencia} from '../asistencia/asistencia.model';
+import { AsistenciaService} from '../asistencia/asistencia.service';
+
 
 @Component({
-  selector: 'app-detalle-contacto',
-  templateUrl: './detalle-contacto.page.html',
-  styleUrls: ['./detalle-contacto.page.scss'],
+  selector: 'app-detalle-asistencia',
+  templateUrl: './detalle-asistencia.page.html',
+  styleUrls: ['./detalle-asistencia.page.scss'],
 })
-export class DetalleContactoPage implements OnInit {
+export class DetalleAsistenciaPage implements OnInit {
 
-  contacto={
+  asistencia={
     id:'',
-    nombre:'',
-    apellidos:'',
-    domicilio:'',
-    email:'',
-    fono:''
+    asignatura:'',
+    seccion:'',
+    sesion:''
   };
-contactoService: ContactosService;
+asistenciaService: AsistenciaService;
 
 campo: string;
 
 constructor(private router: Router,private activateRoute: ActivatedRoute,
-     contactoService: ContactosService,public toastController: ToastController) {
-       this.contactoService=contactoService;
+  asistenciaService: AsistenciaService,public toastController: ToastController) {
+       this.asistenciaService=asistenciaService;
        this.activateRoute.paramMap.subscribe(
         paramMap=>{
-          const idContactoRecibido=paramMap.get('contactoId');
-          alert(idContactoRecibido);
-         this.contactoService.getContacto(idContactoRecibido).then(res=>{
-         this.contacto=res;
-         this.contacto.id=idContactoRecibido;
+          const idAsistenciaRecibido=paramMap.get('asistenciaId');
+          alert(idAsistenciaRecibido);
+         this.asistenciaService.getAsistencia(idAsistenciaRecibido).then(res=>{
+         this.asistencia=res;
+         this.asistencia.id=idAsistenciaRecibido;
           });
         }
       );
@@ -42,30 +41,28 @@ constructor(private router: Router,private activateRoute: ActivatedRoute,
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(
       paramMap=>{
-        const idContactoRecibido=paramMap.get('contactoId');
-        alert(idContactoRecibido);
-       this.contactoService.getContacto(idContactoRecibido).then(res=>{
-       this.contacto=res;
-       this.contacto.id=idContactoRecibido;
+        const idAsistenciaRecibido=paramMap.get('asistenciaId');
+        alert(idAsistenciaRecibido);
+       this.asistenciaService.getAsistencia(idAsistenciaRecibido).then(res=>{
+       this.asistencia=res;
+       this.asistencia.id=idAsistenciaRecibido;
         });
       }
     );
   }
 
-  actualizarContacto()
+  actualizarAsistencia()
   {
     // Se declara e instancia un elemento de tipo NavigationExtras
-    if(this.validateModel(this.contacto)){
+    if(this.validateModel(this.asistencia)){
       alert('Inicia Actualiza');
-      alert('id: '+this.contacto.id);
-      alert('Nombre: '+this.contacto.nombre);
-        this.contactoService.updateContacto(
-          this.contacto.id,
-          this.contacto.nombre.valueOf(),
-          this.contacto.apellidos.valueOf(),
-          this.contacto.domicilio.valueOf(),
-          this.contacto.email.valueOf(),
-          this.contacto.fono.valueOf());
+      alert('id: '+this.asistencia.id);
+      alert('Asignatura: '+this.asistencia.asignatura);
+        this.asistenciaService.updateAsistencia(
+          this.asistencia.id,
+          this.asistencia.asignatura.valueOf(),
+          this.asistencia.seccion.valueOf(),
+          this.asistencia.sesion.valueOf());
           this.presentToast('Datos correctamente actualizados');
 
           alert('Fin Actualiza');
@@ -76,10 +73,10 @@ constructor(private router: Router,private activateRoute: ActivatedRoute,
     }
 
   }
- borrarContacto(){
+ borrarAsistencia(){
   alert('Inicia delete');
     // Se declara e instancia un elemento de tipo NavigationExtras
-        this.contactoService.deleteContacto(this.contacto.id);
+        this.asistenciaService.deleteAsistencia(this.asistencia.id);
           this.presentToast('Datos correctamente eliminados');
           alert('Fin Delete');
   }

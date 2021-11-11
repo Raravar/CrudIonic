@@ -11,7 +11,7 @@ export class RegistraUsuarioPage implements OnInit {
   usuario={
     nombre:'',
     apellidos:'',
-    email:'',
+    user:'',
     password:''
   };
 
@@ -21,14 +21,20 @@ export class RegistraUsuarioPage implements OnInit {
 
   ngOnInit() {
   }
-  registrarContacto(){
+  registrarUsuario(){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        user: this.usuario // Al estado le asignamos un objeto con clave y valor
+      }
+    };
     // Se declara e instancia un elemento de tipo NavigationExtras
     if(this.validateModel(this.usuario)){
         this.usuarioService.addUsuario(this.usuario.nombre.valueOf(),
           this.usuario.apellidos.valueOf(),
-          this.usuario.email.valueOf(),
+          this.usuario.user.valueOf(),
           this.usuario.password.valueOf());
           this.presentToast('Datos registrados correctamente');
+          this.router.navigate(['/login'],navigationExtras);//si se cumplen las validaciones muestra el mensaje y redirecciona a login
     }
     else
     {
@@ -37,7 +43,7 @@ export class RegistraUsuarioPage implements OnInit {
 
   }
    /**
-   * Muestra un toast al usuario
+   * Muestra un toast al usuario (mensaje flotante)
    * @param message Mensaje a presentar al usuario
    * @param duration Duración el toast, este es opcional
    */
@@ -55,7 +61,7 @@ export class RegistraUsuarioPage implements OnInit {
    * campos del html mediante su modelo
    */
     validateModel(model: any){
-    // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor
+    // Recorro todas las entradas que me entrega Object.entries y obtengo su valor
     for (var [key, value] of Object.entries(model)) {
       // Si un valor es "" se retornara false y se avisara de lo faltante
       if (value==='') {

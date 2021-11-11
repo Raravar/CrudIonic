@@ -12,25 +12,27 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'contactos',
+    path: 'asistencia',
     pathMatch: 'full',
-    loadChildren: () => import('./contactos/contactos.module').then( m => m.ContactosPageModule)
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
   {
-   path: 'detalle/:contactoId',
+   path: 'detalle/:asistenciaId',
    pathMatch: 'full',
-   loadChildren: () => import('./detalle-contacto/detalle-contacto.module').then( m => m.DetalleContactoPageModule)
+   loadChildren: () => import('./detalle-asistencia/detalle-asistencia.module').then( m => m.DetalleAsistenciaPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'registrar-contacto',
-    loadChildren: () => import('./contactos/registrar-contacto/registrar-contacto.module').then( m => m.RegistrarContactoPageModule)
+    path: 'registrar-asistencia',
+    loadChildren: () => import('./asistencia/registrar-asistencia/registrar-asistencia.module').then( m => m.RegistrarAsistenciaPageModule)
   },
-
-
+  {
+    path: 'principal',
+    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
+  }
 ];
 
 @NgModule({
