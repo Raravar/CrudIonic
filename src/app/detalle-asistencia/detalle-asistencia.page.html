@@ -1,0 +1,42 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Asistencia</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/asistencia'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class='card'>
+
+    <ion-card-header>
+      <ion-title>Datos Asistencia</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="full">
+        <ion-input type="hidden" [(ngModel)]="asistencia.id" ></ion-input>
+        <ion-label position="floating">Asignatura</ion-label>
+        <ion-input type="text" [(ngModel)]="asistencia.asignatura"></ion-input>
+      </ion-item> 
+     <ion-item lines="full">
+      <ion-label position="floating">Seccion</ion-label>
+      <ion-input type="text" [(ngModel)]="asistencia.seccion"></ion-input>
+    </ion-item>
+   <ion-item lines="full">
+        <ion-label position="floating">Sesion</ion-label>
+        <ion-input type="text" [(ngModel)]="asistencia.sesion"></ion-input>
+   </ion-item>   
+   </ion-card-content> 
+    <ion-row>
+      <ion-col>
+        <!-- Indicamos mediante el (click) la funcion a quien referenciara-->
+        <ion-button  shape="round" expand="full" (click)="actualizarAsistencia()">Grabar Modificación</ion-button>
+      </ion-col>
+      <ion-col>
+           <!-- Indicamos mediante el (click) la funcion a quien referenciara-->
+           <ion-button shape="round" color="danger" expand="full" (click)="borrarAsistencia()">Borrar Asistencia</ion-button>
+          </ion-col>
+    </ion-row>
+  
+</ion-content>

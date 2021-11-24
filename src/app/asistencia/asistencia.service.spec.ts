@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContactosService } from './contactos.service';
-
-describe('ContactosService', () => {
-  let service: ContactosService;
+import { AsistenciaService } from './asistencia.service';
+// Es plural
+describe('AsistenciaService', () => {
+  let service: AsistenciaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ContactosService);
+    service = TestBed.inject(AsistenciaService);
   });
 
   it('should be created', () => {

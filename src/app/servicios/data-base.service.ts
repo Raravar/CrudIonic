@@ -9,7 +9,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 
-import { Contacto } from '../contactos/contacto.model';
+import { Asistencia } from '../asistencia/asistencia.model';
 
 
 
@@ -24,16 +24,14 @@ export class DataBaseService {
   private  sqlPorter: SQLitePorter;
   private sqlite: SQLite;
 
-  listaContactos = new BehaviorSubject([]);
+  listaAsistencias = new BehaviorSubject([]);
 
-  private contacto: Contacto;
+  private asistencia: Asistencia;
 
 
 
   constructor( http: HttpClient,plataforma: Platform,sqlite: SQLite, sqlPorter: SQLitePorter)
   {
-    //Detectar Plataforma
-    alert('xxxx-01');
  plataforma.ready()
    .then(() => {
       this.sqlite=sqlite;
@@ -46,10 +44,10 @@ export class DataBaseService {
         createFromLocation: 1
       })
       .then((db: SQLiteObject) => {
-        alert('xxxx-2');
+        
         this.dataBase = db;
         this.crearTablas();
-        alert('xxxx-1 ');
+        
         }).catch(e =>{
           alert('Error conexión'  );
           console.error(e);
@@ -65,11 +63,11 @@ export class DataBaseService {
         this.sqlPorter.importSqlToDb(this.dataBase, sql)
           .then(async _ => {
             // Informar que la base de datos está lista
-            alert('xxxx-3 ');
-             this.cargarContactos();
-            alert('xxxx-4 ');
+            
+             this.cargarAsistencia();
+            
             this.dbReady.next(true);
-            alert('xxxx-5 ');
+            
           }).catch(e => {
             alert('Error al importar la base de datos');
             console.error(e);
@@ -83,60 +81,57 @@ export class DataBaseService {
     return this.dbReady.asObservable();
   }
 
- getContactos(): Observable<Contacto[]>{
-          return this.listaContactos.asObservable();
+ getAsistencias(): Observable<Asistencia[]>{
+          return this.listaAsistencias.asObservable();
   }
 
-  cargarContactos(){
-    return this.dataBase.executeSql('SELECT * FROM contacto', []).then(data => {
-      let contactos: Contacto[] = [];
+  cargarAsistencia(){
+    return this.dataBase.executeSql('SELECT * FROM asistencia', []).then(data => {
+      let asistencia : Asistencia[] = [];
 
       if (data.rows.length > 0) {
         for (var i = 0; i < data.rows.length; i++) {
-            contactos.push(
+            asistencia.push(
               data.rows.item(i));
         }
       }
-      this.listaContactos.next(contactos);
+      this.listaAsistencias.next(asistencia);
     });
   }
 
-getContacto(id): Promise<Contacto> {
-  return this.dataBase.executeSql('SELECT * FROM Contacto WHERE id = ?', [id]).then(resSelect => { 
+getAsistencia(id): Promise<Asistencia> {
+  return this.dataBase.executeSql('SELECT * FROM asistencia WHERE id = ?', [id]).then(resSelect => { 
       return {
             id: resSelect.rows.item(0).id,
-            nombre: resSelect.rows.item(0).nombre,
-            apellidos: resSelect.rows.item(0).apellidos,
-            domicilio: resSelect.rows.item(0).domicilio,
-            email: resSelect.rows.item(0).email,
-            fono: resSelect.rows.item(0).fono
+            asignatura: resSelect.rows.item(0).asignatura,
+            seccion: resSelect.rows.item(0).seccion,
+            sesion: resSelect.rows.item(0).sesion
       }
     });
   }
 
 
-  addContacto(nombre, apellidos,domicilio,email,fono) {
-    let data = [ nombre, apellidos,domicilio,email,fono];
-    return this.dataBase.executeSql('INSERT INTO contacto (nombre, apellidos, domicilio, email,fono) VALUES (?, ?, ? ,? ,?)', data)
+  addAsistencia(asignatura, seccion, sesion) {
+    let data = [ asignatura, seccion,sesion];
+    return this.dataBase.executeSql('INSERT INTO asistencia (asignatura, seccion, sesion) VALUES (?, ?, ?)', data)
     .then(res => {
-     this.cargarContactos();
+     this.cargarAsistencia();
     });
   }
-  updateContacto(nombre, apellidos,domicilio,email,fono,id) {
-    alert('Actualiza '+id);
-    let data = [ nombre, apellidos,domicilio,email,fono,id];
-    return this.dataBase.executeSql('UPDATE contacto SET nombre=?, apellidos=?, domicilio=?, email=?,fono=? WHERE id=?', data)
+  updateAsistencia( asignatura, seccion,sesion,id) {
+    let data = [ asignatura, seccion,sesion,id];
+    return this.dataBase.executeSql('UPDATE asistencia SET asignatura=?, seccion=?, sesion=? WHERE id=?', data)
     .then(res => {
-     this.cargarContactos();
+     this.cargarAsistencia();
     });
   }
 
- deleteContacto(id) {
+ deleteAsistencia(id) {
     alert('Delete '+id);
     let data = [ id];
-    return this.dataBase.executeSql('DELETE FROM contacto  WHERE id=?', data)
+    return this.dataBase.executeSql('DELETE FROM asistencia  WHERE id=?', data)
     .then(res => {
-     this.cargarContactos();
+     this.cargarAsistencia();
     });
   }
 }

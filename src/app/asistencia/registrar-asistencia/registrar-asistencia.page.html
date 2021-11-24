@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Volver</ion-title>
+    <ion-buttons slot="start" > <!--posiciona al junto al titulo el boton-->
+      <ion-back-button defaultHref='/asistencia'></ion-back-button> <!--boton para volver atras ubicado junto al titulo forma de flecha-->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class='card'>
+
+    <ion-card-header>
+      <ion-title>Datos Asistencia</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item slot="start">
+        <ion-label position="floating">Asignatura</ion-label>
+        <ion-input type="text" [(ngModel)]="asistencia.asignatura"></ion-input>
+      </ion-item> 
+     <ion-item slot="start">
+      <ion-label position="floating">Sección</ion-label>
+      <ion-input type="text" [(ngModel)]="asistencia.seccion"></ion-input>
+    </ion-item>
+   <ion-item slot="start">
+        <ion-label position="floating">Sesion</ion-label>
+        <ion-input type="text" [(ngModel)]="asistencia.sesion"></ion-input>
+   </ion-item>
+
+   </ion-card-content> 
+    <ion-row>
+      <ion-col>
+        <!-- Indicamos mediante el (click) la funcion a quien referenciara-->
+        <ion-button expand="full" shape="round" color="success" (click)="registrarAsistencia()">Registrar Asistencia</ion-button>
+      </ion-col>
+    </ion-row>
+  
+</ion-content>

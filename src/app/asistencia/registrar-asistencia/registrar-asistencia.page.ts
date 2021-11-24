@@ -1,38 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { ContactosService} from '../contactos.service';
+import { AsistenciaService} from '../asistencia.service';
 
 @Component({
-  selector: 'app-registra-contacto',
-  templateUrl: './registrar-contacto.page.html',
-  styleUrls: ['./registrar-contacto.page.scss'],
+  selector: 'app-registra-asistencia',
+  templateUrl: './registrar-asistencia.page.html',
+  styleUrls: ['./registrar-asistencia.page.scss'],
 })
-export class RegistrarContactoPage implements OnInit {
-  contacto={
-    nombre:'',
-    apellidos:'',
-    domicilio:'',
-    email:'',
-    fono:''
+export class RegistrarAsistenciaPage implements OnInit {
+  asistencia={
+    asignatura:'',
+    seccion:'',
+    sesion:''
   };
-  contactoService: ContactosService;
+  asistenciaService: AsistenciaService;
   campo: string;
   constructor(private router: Router,public toastController: ToastController,
-    contactoService: ContactosService) {
-      this.contactoService=contactoService;
+    asistenciaService: AsistenciaService) {
+      this.asistenciaService=asistenciaService;
      }
 
   ngOnInit() {
   }
-  registrarContacto(){
+  registrarAsistencia(){
     // Se declara e instancia un elemento de tipo NavigationExtras
-    if(this.validateModel(this.contacto)){
-        this.contactoService.addContacto(this.contacto.nombre.valueOf(),
-          this.contacto.apellidos.valueOf(),
-          this.contacto.domicilio.valueOf(),
-          this.contacto.email.valueOf(),
-          this.contacto.fono.valueOf());
+    if(this.validateModel(this.asistencia)){
+        this.asistenciaService.addAsistencia(this.asistencia.asignatura.valueOf(),
+          this.asistencia.seccion.valueOf(),
+          this.asistencia.sesion.valueOf());
           this.presentToast('Datos registrados correctamente');
     }
     else
